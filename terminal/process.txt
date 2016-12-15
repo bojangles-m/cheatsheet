@@ -1,0 +1,14 @@
+# list of all running processes live
+top -o cpu
+top -o rsize
+
+# only displaying terminal processes active under the current user
+ps aux|more
+# search for a specific process
+ps aux|grep <PROG_NAME>
+ps -ef | grep python
+
+# Kill process
+kill -9 <PID>
+pkill -f <PROG_NAME>
+pkill -f python

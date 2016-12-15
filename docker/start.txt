@@ -1,0 +1,30 @@
+# install Docker
+brew install docker
+
+
+# Compose is a tool for defining and running multi-container Docker applications.
+brew install docker-compose
+
+
+# Docker machine to create VM and attach to it
+brew install docker-machine
+
+
+# To run machine you need Virtual box
+# It’s possible you’ll fail to install VirtualBox. When you do fail, turn on 
+# System Preference and see if ‘System software from developer “Oracle America, inc”
+# was blocked from loading.’ If you see that message, click Allow button and try to 
+# install again.
+brew cask install virtualbox
+
+
+# To start with it forst install default machine
+docker-machine create default
+
+
+# not always necesery
+docker-machine start default
+
+
+# dont forget to adjust bash_profile with this command
+eval "$(docker-machine env default)"

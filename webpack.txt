@@ -1,0 +1,2 @@
+# script in package.json - if it is out of memory use 
+"build": "node --max-old-space-size=4096 ./node_modules/webpack/bin/webpack --config=js/config/webpack.dev-config.js --progress --colors --watch",

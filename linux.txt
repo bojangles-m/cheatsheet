@@ -1,0 +1,3 @@
+# setfacl
+sudo setfacl -R -m u:username:rwX -m u:whoami:rwX folder
+sudo setfacl -dR -m u:username:rwX -m u:whoami:rwX folder

@@ -1,0 +1,5 @@
+# Cursor movement
+gg - go to the first line of the document
+G - go to the last line of the document
+1G  Move to the first line of the file
+5G - go to line 5

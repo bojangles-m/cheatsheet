@@ -1,0 +1,8 @@
+# create new dir on desktop
+mkdir ~/Desktop/<folder name>
+
+# unmount inserted NTFS disk
+sudo umount /Volumes/<name of the volume>
+
+# new mount with all credentials
+sudo mount -t ntfs -o rw,auto,nobrowse /dev/[disk3s2] ~/Desktop/<before created folder>

@@ -1,0 +1,6 @@
+# npm install local package
+npm i -S ~/Repositories/examples/node_modules/webpack-i18n/
+
+
+# command line run
+tools/translationextractor/node_modules/babel-cli/bin/babel-node.js tools/translationextractor/src/texHbsParser.js

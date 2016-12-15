@@ -1,0 +1,9 @@
+rm build/asfiles
+
+find as/ -type f | egrep -i '\.as$|\.mxml$' > build/asfiles
+
+xgettext.pl --output build/all.pot -f build/asfiles
+xgettext -f build/asfiles -o build/pgettext.pot --keyword=_P:1c,2 --from-code=UTF-8 --add-comments='TRANSLATOR' --language=Python
+
+
+msgcomm --unique build/all.pot build/pgettext.pot > as/locale/PicMonkeyAs.pot --omit-header --force-po

@@ -1,0 +1,159 @@
+http://blog.zot24.com/tips-tricks-docker/
+https://docker-curriculum.com/#introduction
+https://hub.docker.com/search?q=&type=image
+
+# A Better Way to Develop Node.js with Docker
+https://hackernoon.com/a-better-way-to-develop-node-js-with-docker-cd29d3a0093?ref=hackernoon.com
+
+
+
+############################################################
+### FIRST ATTEMPT 
+############################################################
+# The pull command fetches the busybox image from the Docker registry
+docker pull busybox
+
+# Command to see a list of all images on your system.
+docker images
+
+# Let's now run a Docker container based on this image
+docker run
+
+# Let's try something more exciting.
+# In this case, the Docker client dutifully ran the echo command in our
+# busybox container and then exited it.
+docker run busybox echo "Hello form Busybox"
+
+# Command shows you all containers that are currently running.
+docker ps
+
+# There is a way to run more than just one command in a container. Let's try that now
+# Running the run command with the -it flags attaches us to an interactive tty.
+docker run -it busybox sh
+
+# I clean up containers once I'm done with them.
+docker rm 305297d7a235 ff0a5c3750b9
+
+
+############################################################
+### STATIC SITE START
+############################################################
+
+# We can download and run the image directly in one go using docker run. 
+# As noted above, the --rm flag automatically removes the container when it exits.
+docker run --rm prakhar1989/static-site
+
+# The client is not exposing any ports so we need to re-run the container
+# -d will detach our terminal, -P will publish all exposed ports to random ports 
+# and finally --name corresponds to a name we want to give.
+docker run -d -P --name static-site prakhar1989/static-site
+
+# Now we can see the ports by running the docker port [CONTAINER] command
+docker port static-site
+
+# if you're using docker-toolbox, then you need docker-machine to get the IP.
+docker-machine ip default
+
+# You can also specify a custom port to which the client will forward connections to the container.
+docker run -p 8888:80 prakhar1989/static-site
+
+# To stop a detached container, run docker stop and container name
+docker stop static-site
+
+
+
+
+############################################################
+### LIST DOCKER CONTAINERS
+############################################################
+# List all running containers
+docker ps
+
+# List of all containers that we ran
+docker ps -a
+
+#To list all running containers (just stating the obvious and also example use of -f filtering option)
+docker ps -a -f status=running
+
+# List container id of all containers
+docker ps -aq
+
+
+
+
+############################################################
+### DOCKER IMAGES
+############################################################
+# To see all existing images
+docker images
+
+# Lastly, you can also delete images that you no longer need
+docker rmi
+
+# Remove all images
+docker rmi $(docker images | grep -v 'ubuntu' | awk {'print $3'})
+
+# Remove all images except "my-image"
+docker rmi $(docker images | grep -v 'ubuntu\|my-image' | awk {'print $3'})
+
+# You can pull a specific version of image
+# If you don't provide a specific version number, the client defaults to latest
+docker pull ubuntu:18.04
+
+
+
+############################################################
+### REMOVE DOCKER CONTAINERS
+############################################################
+# leaving stray containers will eat up disk space so you should remove them
+# This command deletes all containers that have a status of exited
+# To remove all containers that are NOT running
+docker rm $(docker ps -a -q -f status=exited)
+docker rm `docker ps -aq -f status=exited`
+docker container prune
+
+# Kill containers and remove them:
+docker rm $(docker kill $(docker ps -aq))
+
+
+
+############################################################
+### RUN CONTAINER
+############################################################
+docker run -p 5000:80
+docker run <image-name> 
+docker run -d -p 9999:80 php7-test
+docker run -d -p 9998:80 --name php7-test-runing php7-test
+docker run -d -p 9999:80 -v source:/var/www/html/ php7-test
+docker run -d -p 9998:80 -v /Users/Bojch/Repositories/examples/docker/php/source/:/var/www/html/ php7-test
+docker run -it --rm --name python-test python-alpine
+
+# run container z webpack
+docker run --rm -d \
+--volume $HOME/repositories/hello-world:/usr/src/app \
+-w /usr/src/app \
+-p 1236:7000 \
+node \
+npm run dev
+
+
+
+############################################################
+### STOP RUNNING CONTAINER
+############################################################
+docker stop [image_name | ID]
+docker stop $(docker ps -q)
+
+
+
+############################################################
+### USEFUL COMMANDS
+############################################################
+docker logs <id>
+docker exec -it <container> /bin/bash
+
+# The output will provide details on the container configurations including the volumes
+docker inspect <image-name | ID>
+
+# A docker volume inspect will give you its path and info about folder
+docker volume inspect <volume-name>

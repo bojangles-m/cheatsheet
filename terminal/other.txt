@@ -1,0 +1,2 @@
+# grant access to not mountable disk
+sudo chmod 666 /dev/disk2
