@@ -1,0 +1,8 @@
+#Find what is running on TCP
+
+sudo lsof -nP -iTCP:1025 -sTCP:LISTEN
+
+lsof -i tcp:1025
+
+kill
+sudo kill 43841

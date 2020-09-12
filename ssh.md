@@ -1,0 +1,81 @@
+## RSA SSH keys
+
+If you use RSA keys for SSH, the US National Institute of Standards and Technology recommends
+that you use a key size of at least 2048 bits.
+By default, the ssh-keygen command creates an 1024-bit RSA key.
+
+You can create and configure an RSA key with the following command, substituting if desired for the minimum recommended key size of 2048:
+
+```
+ssh-keygen -t rsa -b 2048 -C "email@example.com"
+```
+
+The -C flag, with a quoted comment such as an email address, is an optional way to label your SSH keys.
+
+You'll see a response similar to:
+
+```
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/user/.ssh/id_rsa):
+```
+
+##Testing that everything is set up correctly
+
+To test whether your SSH key was added correctly, run the following command in
+your terminal (replacing gitlab.com with your GitLab's instance domain):
+
+```
+ssh -T git@gitlab.com
+```
+
+The first time you connect to GitLab via SSH, you will be asked to verify the
+authenticity of the GitLab host that you're connecting to.
+For example, when connecting to GitLab.com, answer yes to add GitLab.com to
+the list of trusted hosts:
+
+```
+The authenticity of host 'gitlab.com (35.231.145.151)' can't be established.
+ECDSA key fingerprint is SHA256:HbW3g8zUjNSksFbqTiUWPWg2Bq1x8xdGUrliXFzSnUw.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'gitlab.com' (ECDSA) to the list of known hosts.
+```
+
+Once added to the list of known hosts, you won't be asked to validate the
+authenticity of GitLab's host again. Run the above command once more, and
+you should only receive a Welcome to GitLab, @username! message.
+
+If the welcome message doesn't appear, you can troubleshoot the problem by running ssh
+in verbose mode with the following command:
+
+```
+ssh -Tvvv git@gitlab.com
+```
+
+## Working with non-default SSH key pair paths
+
+If you used a non-default file path for your GitLab SSH key pair configure your SSH client to point to your GitLab private SSH key. To make these changes, run the following commands:
+
+```
+eval $(ssh-agent -s)
+ssh-add <path to private SSH key>
+```
+
+Now save these settings to the ~/.ssh/config file. Two examples for SSH keys dedicated to GitLab are shown here:
+
+```
+# GitLab.com
+Host gitlab.com
+  Preferredauthentications publickey
+  IdentityFile ~/.ssh/gitlab_com_rsa
+```
+
+```
+# Private GitLab instance
+Host gitlab.company.com
+  Preferredauthentications publickey
+  IdentityFile ~/.ssh/example_com_rsa
+```
+
+Public SSH keys need to be unique to GitLab, as they will bind to your account.
+
+Your SSH key is the only identifier you'll have when pushing code via SSH, that's why it needs to uniquely map to a single user.

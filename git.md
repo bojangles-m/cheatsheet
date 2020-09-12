@@ -67,3 +67,13 @@ Deleted file but didn’t commit - needs to be staged
 ```
 $ git checkout HEAD <filename>
 ```
+
+Tagging
+
+```
+// list tags
+git tag -l
+
+// remove tag
+$ git tag -d <tag_name>
+```

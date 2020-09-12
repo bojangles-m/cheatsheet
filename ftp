@@ -1,8 +1,0 @@
-# connect
-ftp username@hostname
-
-# download file
-get filen_name
-
-# upload file
-put file_name
