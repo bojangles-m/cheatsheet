@@ -1,2 +1,6 @@
 # grant access to not mountable disk
 sudo chmod 666 /dev/disk2
+
+# setfacl
+sudo setfacl -R -m u:username:rwX -m u:whoami:rwX folder
+sudo setfacl -dR -m u:username:rwX -m u:whoami:rwX folder

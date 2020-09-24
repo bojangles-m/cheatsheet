@@ -1,1 +1,0 @@
-./manage.sh transactional_mails -s 104.198.21.237 -e bojan@parkside.at -l es

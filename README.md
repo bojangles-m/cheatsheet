@@ -1,3 +1,3 @@
-# Cheatsheet
+# Cheat sheet
 
-You can find here my personal cheatsheet to remeber it easier.
+You can find here my personal cheat sheet to remember it easier.
