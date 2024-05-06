@@ -1,6 +1,20 @@
+An alternative solution which worked:
+
+ - remove docker and docker-compose installed by brew
+ - install Docker Desktop for Mac
+ - run it and pass admin credentials to start everything
+
+It resolved issues with "docker deamon not running" as well as some other issues that the other answer didn't (e.g. 0.0.0.0 ports were not redirected with docker installed using brew and worked smoothly with Docker Desktop installation).
+
+
+
+--------------------------------------------------------------------------------
+
+
+
 # install Docker
 brew install docker
-
+brew install --cask docker
 
 # Compose is a tool for defining and running multi-container Docker applications.
 brew install docker-compose
@@ -15,7 +29,7 @@ brew install docker-machine
 # System Preference and see if ‘System software from developer “Oracle America, inc”
 # was blocked from loading.’ If you see that message, click Allow button and try to 
 # install again.
-brew cask install virtualbox
+brew install --cask virtualbox
 
 
 # To start with it forst install default machine

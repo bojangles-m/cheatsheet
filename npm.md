@@ -1,5 +1,27 @@
 # NPMjs Cheat Sheet
 
+## <i>IMPORTANT - ASDF</i>
+
+If you use asdf package manager and some global packages are installed or packages are linked Reshim needs to be executed!!!!
+
+```js
+$ asdf reshim
+```
+
+<hr />
+
+To check whether a package is installed
+
+```js
+npm ls --global foo
+```
+
+In order to uninstall the globally linked foo package, the following command can be used:
+
+```js
+sudo npm rm --global foo
+```
+
 List global packages on Level 0
 
 ```js
@@ -58,6 +80,16 @@ Update published package
 
 ```js
 // Update version
-$ npm version <new-version>
+$ npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]
 $ npm publish
+```
+
+Inspect package version
+
+```js
+# to view a package''s published version
+$ npm view <pkg> version
+
+# to inspect current package/dependency versions
+$ npm ls
 ```

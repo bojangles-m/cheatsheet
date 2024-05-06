@@ -16,6 +16,29 @@ mongod --config /usr/local/etc/mongod.conf
 /usr/local/var/log/mongodb/mongo.log
 ```
 
+## Trouble shooting
+
+```
+Had the same problem and it could be due to your service not being able to create the socket (check with netstat -an | grep 27017 if you have it up properly)
+
+What I did:
+
+Create a properly placed data/db on System/Volumes/Data/data/db, with
+
+sudo mkdir -p /System/Volumes/Data/data/db
+sudo chown -R `id -un` /System/Volumes/Data/data/db
+And, then, add that path to mongod.conf (located on /usr/local/etc/mongod.conf), replacing dbPath there:
+
+...
+storage:
+  dbPath: /System/Volumes/Data/data/db
+...
+Then, restart it. If you are using brew, do:
+
+brew services restart mongodb-community
+Source: https://zellwk.com/blog/install-mongodb/
+```
+
 ## Misc
 
 Run mongo server with node
