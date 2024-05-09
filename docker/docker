@@ -5,6 +5,15 @@ https://hub.docker.com/search?q=&type=image
 # A Better Way to Develop Node.js with Docker
 https://hackernoon.com/a-better-way-to-develop-node-js-with-docker-cd29d3a0093?ref=hackernoon.com
 
+############################################################
+### TROUBLESHOOT 
+############################################################
+
+# ORBSTACK & PHP Storm: 
+# if  php storm can't connect to the docker you need to remove .docker/run folder and symlink to .orbstack/run
+rm -rf ~/.docker/run
+ln -s ~/.orbstack/run ~/.docker/run
+
 
 
 ############################################################
