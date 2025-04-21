@@ -51,6 +51,38 @@ in verbose mode with the following command:
 ssh -Tvvv git@gitlab.com
 ```
 
+## Link the key to your global git configuration (Telling Git about your signing key)
+
+If you are missing GPG install it with homebrew
+
+```
+brew install gnupg
+```
+
+### Generate a new GPG key from hidden email address
+
+your github email: https://github.com/settings/emails
+new GPG key: https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
+
+### Adjust git global config
+
+```
+git config --global --list
+
+git config --global <prop> <value>
+
+git config --global user.name "<name>"
+git config --global user.signingkey "<gpg key>"
+git config --global user.email "<github email>"
+git config --global commit.gpgsign true
+git config --global pull.rebase false
+git config --global init.defaultbranch main
+
+# Enable default commit signing via the CLI
+git config --global gpg.program gpg
+
+```
+
 ## Working with non-default SSH key pair paths
 
 If you used a non-default file path for your GitLab SSH key pair configure your SSH client to point to your GitLab private SSH key. To make these changes, run the following commands:
