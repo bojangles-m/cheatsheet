@@ -59,6 +59,28 @@ If you are missing GPG install it with homebrew
 brew install gnupg
 ```
 
+If getting error: gpg failed to sign the data then:
+GPG uses pinentry to prompt you for your passphrase. If you're not seeing any prompt, you may need a different pinentry program:
+
+1. Install GUI version
+
+```sh
+brew install pinentry-mac
+```
+
+2. Then update your GPG config
+
+```sh
+echo "pinentry-program /opt/homebrew/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+```
+
+3. Then reload GPG agent
+
+```sh
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
+```
+
 ### Generate a new GPG key from hidden email address
 
 your github email: https://github.com/settings/emails
