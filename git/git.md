@@ -172,6 +172,46 @@ git config core.hooksPath .git/hooks/
 
 ### List config
 
-```shell
+```sh
 $ git config -l
+```
+
+## Move stashed Git changes from one Mac to another
+
+1. On the source Mac (where the stash is): This saves the stashed diff into a patch file.
+
+```sh
+git stash show -p > stash.patch
+```
+
+2. Transfer stash.patch to the other Mac
+
+3. On the target Mac (in the same repo): your stash changes are applied to your working directory!
+
+```sh
+git apply stash.patch
+```
+
+## Move multiple git branches from one to another without pushing them to the origin server
+
+1. On the Source Computer navigate to the repo and create bundle file
+
+```sh
+git bundle create <prs.bundle> feature/one feature/two bugfix/three
+```
+
+This creates a prs.bundle file that includes those branches and all their commit history.
+
+2. Transfer the Bundle to the target computer where you can:
+
+a. Verify the bundle (optional):
+
+```sh
+git bundle verify /path/to/prs.bundle
+```
+
+b. Fetch from the bundle and create a local branch with the same name.
+
+```sh
+git fetch /path/to/prs.bundle branch-name:branch-name
 ```
